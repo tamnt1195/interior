@@ -19,20 +19,26 @@
             // return $result;
 
             $stmt = self::db()->prepare($select);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->execute();
-            $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+            $result = $stmt->fetchAll();
             return $result;
         }
 
         private static function getInstance($select) {
-            $results = self::db()->query($select);
-            $result = $results->fetch();
+            // $results = self::db()->query($select);
+            // $result = $results->fetch();
+            // return $result;
+
+            $stmt = self::db()->prepare($select);
+            $stmt->setFetchMode(PDO::FETCH_OBJ);
+            $stmt->execute();
+            $result = $stmt->fetch();
             return $result;
         }
 
         private static function exec($select) {
-            $result = self::db()->exec($select);
-            return $result;
+            self::db()->exec($select);
         }
 
         public static function all() {

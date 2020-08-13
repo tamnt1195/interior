@@ -17,14 +17,14 @@
 
         $list2 = product::where('name', 'bàn');
 
-        // foreach($list2 as $row) {
-        //     echo $row['name'].'<br>';
-        // }
+        foreach($list2 as $row) {
+            echo $row->name.'<br>';
+        }
         
-        echo '<pre>';
-        // print_r($list);
-        print_r($list2);
-        echo '</pre>';
+        // echo '<pre>';
+        // // print_r($list);
+        // print_r($list2);
+        // echo '</pre>';
     ?>
 </body>
 </html>
