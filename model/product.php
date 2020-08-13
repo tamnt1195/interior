@@ -4,7 +4,12 @@
         public static function setTable($name) {
             self::$table = $name;
         }
-        // self::setTable('product');
+        
+    }
+    product::setTable('product');
+
+
+    // self::setTable('product');
 
         // function getAllDish(){
         //     $sql = "SELECT * from dish";
@@ -41,6 +46,4 @@
         //     $result = $this->getList($sql);
         //     return $result;
         // }
-    }
-    product::setTable('product');
 ?>

@@ -9,22 +9,13 @@
     <?php
         include_once "model/autoLoad.inc.php";
         
-        // $list = product::all();
 
-        // foreach($list as $row) {
-        //     echo $row['name'].'<br>';
-        // }
-
-        $list2 = product::where('name', 'bàn');
+        $list2 = product::search('name', 'bàn', 'order by', 'date', 'asc', 'limit', 3);
 
         foreach($list2 as $row) {
             echo $row->name.'<br>';
         }
-        
-        // echo '<pre>';
-        // // print_r($list);
-        // print_r($list2);
-        // echo '</pre>';
+
     ?>
 </body>
 </html>

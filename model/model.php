@@ -3,46 +3,40 @@
 
         protected static $table="";
 
-        private static function db() {
-            $dsn = "mysql:host=localhost;dbname=interior";
+        private static function conn() {
+            $dsn = "mysql:host=localhost;connname=interior";
             $user = 'root';
             $pass ='';
-            $db = new PDO($dsn, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $db;
+            $conn = new PDO($dsn, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $conn;
         }
         
-        
+        // Trả về nhiều dữ liệu
         private static function getList($select) {
-            // $results = self::db()->query($select);
-            // $result = $results->fetchAll();
-            // return $result;
-
-            $stmt = self::db()->prepare($select);
+            $stmt = self::conn()->prepare($select);
             $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;
         }
 
+        // Trả về 1 dòng dữ liệu
         private static function getInstance($select) {
-            // $results = self::db()->query($select);
-            // $result = $results->fetch();
-            // return $result;
-
-            $stmt = self::db()->prepare($select);
+            $stmt = self::conn()->prepare($select);
             $stmt->setFetchMode(PDO::FETCH_OBJ);
             $stmt->execute();
             $result = $stmt->fetch();
             return $result;
         }
 
+        // Thực thi câu lệnh (update, delete, insert)
         private static function exec($select) {
-            self::db()->exec($select);
+            self::conn()->exec($select);
         }
 
         public static function all() {
-            $sql = "SELECT * from ".self::$table;
+            $sql = "SELECT * FROM ".self::$table;
             $result = self::getList($sql);
             return $result;
         }
@@ -55,7 +49,7 @@
 
         //     $sql = 'SELECT * FROM dish WHERE dish_type = '.$type.' order by date desc limit 6';
         
-        public static function where($condition, $value, $sort='',$col='', $type='', $take='', $num=0) {
+        public static function search($condition, $value, $sort='',$col='', $type='', $take='', $num=0) {
             if ($sort && $col && $type && $take && $num) {
                 $sql = "SELECT * FROM ".self::$table." WHERE ".$condition." = '".$value."' ".$sort." ".$col." ".$type." ".$take." ".$num;
             } else if ($sort && $col && $type) {
