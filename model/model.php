@@ -4,7 +4,7 @@
         protected static $table="";
 
         private static function conn() {
-            $dsn = "mysql:host=localhost;connname=interior";
+            $dsn = "mysql:host=localhost;dbname=interior";
             $user = 'root';
             $pass ='';
             $conn = new PDO($dsn, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
